@@ -1,24 +1,29 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import PlanCard from '../components/PlanCard.jsx';
-import Spinner from '../components/Spinner.jsx';
-import ErrorState from '../components/ErrorState.jsx';
-import { fetchPlans, selectPlans } from '../features/plans/plansSlice.js';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PlanCard from "../components/PlanCard.jsx";
+import Spinner from "../components/Spinner.jsx";
+import ErrorState from "../components/ErrorState.jsx";
+import { fetchPlans, selectPlans } from "../features/plans/plansSlice.js";
 import {
   subscribe,
+  subscribeWithPayment,
   fetchMySubscription,
   selectSubscriptions,
-} from '../features/subscriptions/subscriptionsSlice.js';
-import { SUBSCRIPTION_STATUS } from '../utils/constants.js';
-import styles from './Plans.module.css';
+} from "../features/subscriptions/subscriptionsSlice.js";
+import { SUBSCRIPTION_STATUS } from "../utils/constants.js";
+import styles from "./Plans.module.css";
 
 const Plans = () => {
   const dispatch = useDispatch();
   const { items: plans, status, error } = useSelector(selectPlans);
-  const { current, subscribingPlanId } = useSelector(selectSubscriptions);
+  const {
+    current,
+    subscribingPlanId,
+    error: subError,
+  } = useSelector(selectSubscriptions);
 
   useEffect(() => {
-    if (status === 'idle') dispatch(fetchPlans());
+    if (status === "idle") dispatch(fetchPlans());
     dispatch(fetchMySubscription());
   }, [dispatch, status]);
 
@@ -26,7 +31,14 @@ const Plans = () => {
     current?.status === SUBSCRIPTION_STATUS.ACTIVE ? current.plan?.id : null;
 
   const handleSubscribe = (planId) => {
-    dispatch(subscribe(planId));
+    const plan = plans.find((p) => p.id === planId);
+    if (!plan) return;
+    // Paid plans go through Razorpay checkout; free plans subscribe directly.
+    if (plan.price > 0) {
+      dispatch(subscribeWithPayment(plan));
+    } else {
+      dispatch(subscribe(planId));
+    }
   };
 
   // Highlight the second plan as "most popular" when there are enough plans.
@@ -39,13 +51,16 @@ const Plans = () => {
         <p>Pick the plan that fits your team. Switch or upgrade anytime.</p>
       </header>
 
-      {status === 'loading' && <Spinner center label="Loading plans" />}
+      {/* Surface payment/subscribe errors (e.g. cancelled or failed payment). */}
+      {subError && <div className="alert alert-error">{subError}</div>}
 
-      {status === 'failed' && (
+      {status === "loading" && <Spinner center label="Loading plans" />}
+
+      {status === "failed" && (
         <ErrorState message={error} onRetry={() => dispatch(fetchPlans())} />
       )}
 
-      {status === 'succeeded' && (
+      {status === "succeeded" && (
         <div className={styles.grid}>
           {plans.map((plan, index) => (
             <PlanCard
