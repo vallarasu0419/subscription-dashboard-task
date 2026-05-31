@@ -1,0 +1,114 @@
+.wrapper {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+
+/* ------------------------------ Brand panel ------------------------------ */
+.brand {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-7);
+  color: #eef7f5;
+  background:
+    radial-gradient(circle at 15% 15%, color-mix(in srgb, var(--brand-coral) 30%, transparent), transparent 45%),
+    radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--brand-teal-soft) 35%, transparent), transparent 50%),
+    linear-gradient(150deg, #0a3f3a, #062825);
+}
+.brand :global(.spinner) { border-top-color: #fff; }
+
+.brandTop :global(a) { color: #fff; }
+.brandTop :global(span) { color: #fff; }
+
+.brandBody { max-width: 30rem; }
+.brandHeading {
+  font-size: var(--fs-3xl);
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: var(--space-4);
+}
+.brandText {
+  font-size: var(--fs-md);
+  color: rgba(238, 247, 245, 0.82);
+  line-height: var(--lh-normal);
+  margin-bottom: var(--space-5);
+}
+.brandList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.brandList li {
+  position: relative;
+  padding-left: var(--space-5);
+  font-size: var(--fs-sm);
+  color: rgba(238, 247, 245, 0.9);
+}
+.brandList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--brand-coral-soft);
+  font-weight: var(--fw-bold);
+}
+.brandFootnote {
+  font-size: var(--fs-xs);
+  color: rgba(238, 247, 245, 0.6);
+}
+
+/* ------------------------------ Form panel ------------------------------ */
+.formPanel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: var(--bg);
+}
+.toggleWrap {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+}
+.formInner {
+  width: 100%;
+  max-width: 24rem;
+  animation: fade-in-up 320ms ease;
+}
+.mobileLogo {
+  display: none;
+  margin-bottom: var(--space-5);
+}
+.formHeader { margin-bottom: var(--space-6); }
+.title { font-size: var(--fs-2xl); }
+.subtitle { color: var(--text-muted); margin-top: var(--space-2); }
+
+.footer {
+  margin-top: var(--space-5);
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* Hint box used to surface demo credentials */
+.demo {
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  line-height: var(--lh-snug);
+}
+.demo strong { color: var(--text); }
+
+/* ------------------------------ Responsive ------------------------------ */
+@media (max-width: 880px) {
+  .wrapper { grid-template-columns: 1fr; }
+  .brand { display: none; }
+  .mobileLogo { display: block; }
+}

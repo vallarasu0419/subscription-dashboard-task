@@ -1,0 +1,8 @@
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { sendResponse } from '../utils/ApiResponse.js';
+import { getAllPlans } from '../services/plan.service.js';
+
+export const listPlans = asyncHandler(async (_req, res) => {
+  const plans = await getAllPlans();
+  return sendResponse(res, 200, 'Plans fetched', { plans });
+});

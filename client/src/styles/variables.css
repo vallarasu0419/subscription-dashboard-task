@@ -1,0 +1,122 @@
+/* =========================================================================
+   variables.css — Global design tokens
+   Theme is switched by setting [data-theme="light" | "dark"] on <html>.
+   ========================================================================= */
+
+:root {
+  /* Brand */
+  --brand-teal: #0f766e;
+  --brand-teal-strong: #115e56;
+  --brand-teal-soft: #14b8a6;
+  --brand-coral: #f1734e;
+  --brand-coral-soft: #f8a98e;
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+  --fs-xs: 0.75rem;     /* 12px */
+  --fs-sm: 0.875rem;    /* 14px */
+  --fs-base: 1rem;      /* 16px */
+  --fs-md: 1.125rem;    /* 18px */
+  --fs-lg: 1.375rem;    /* 22px */
+  --fs-xl: 1.75rem;     /* 28px */
+  --fs-2xl: 2.25rem;    /* 36px */
+  --fs-3xl: 3rem;       /* 48px */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-normal: 1.6;
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --sidebar-width: 256px;
+  --navbar-height: 68px;
+  --content-max: 1180px;
+
+  /* Transitions */
+  --transition-fast: 140ms ease;
+  --transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Status palette (theme-agnostic) */
+  --status-active: #15a06b;
+  --status-active-bg: rgba(21, 160, 107, 0.14);
+  --status-expired: #d4683a;
+  --status-expired-bg: rgba(212, 104, 58, 0.14);
+  --status-cancelled: #8a8f99;
+  --status-cancelled-bg: rgba(138, 143, 153, 0.16);
+  --status-none: #6b7280;
+  --status-none-bg: rgba(107, 114, 128, 0.14);
+}
+
+/* ---------------------------- Light theme ---------------------------- */
+[data-theme='light'] {
+  --bg: #f6f3ec;
+  --bg-elevated: #fbf9f4;
+  --surface: #ffffff;
+  --surface-muted: #f2efe7;
+  --border: #e4ded2;
+  --border-strong: #d4ccba;
+
+  --text: #1c1f26;
+  --text-muted: #5d6470;
+  --text-faint: #8a909c;
+
+  --primary: var(--brand-teal);
+  --primary-strong: var(--brand-teal-strong);
+  --primary-contrast: #ffffff;
+  --accent: var(--brand-coral);
+
+  --shadow-sm: 0 1px 2px rgba(28, 31, 38, 0.06);
+  --shadow-md: 0 8px 24px rgba(28, 31, 38, 0.08);
+  --shadow-lg: 0 20px 48px rgba(28, 31, 38, 0.12);
+
+  --overlay: rgba(28, 31, 38, 0.45);
+  color-scheme: light;
+}
+
+/* ---------------------------- Dark theme ----------------------------- */
+[data-theme='dark'] {
+  --bg: #0e1116;
+  --bg-elevated: #141821;
+  --surface: #1a1f2a;
+  --surface-muted: #20262f;
+  --border: #2a313c;
+  --border-strong: #3a424f;
+
+  --text: #eef1f5;
+  --text-muted: #a4adba;
+  --text-faint: #6e7785;
+
+  --primary: var(--brand-teal-soft);
+  --primary-strong: #0d9488;
+  --primary-contrast: #04201d;
+  --accent: var(--brand-coral-soft);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.55);
+
+  --overlay: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
