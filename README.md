@@ -137,14 +137,26 @@ Then open **http://localhost:5173** in your browser.
 ### `server/.env`
 
 ```ini
+# Server
 NODE_ENV=development
 PORT=5000
+
+# Frontend origin (used for CORS + secure cookies)
 CLIENT_URL=http://localhost:5173
+
+# MongoDB connection string
 MONGO_URI=mongodb://127.0.0.1:27017/subscription_dashboard
+
+# JWT secrets — replace with long random strings in production
 JWT_ACCESS_SECRET=replace_with_a_strong_random_access_secret
 JWT_REFRESH_SECRET=replace_with_a_strong_random_refresh_secret
 JWT_ACCESS_EXPIRES_IN=15m
 JWT_REFRESH_EXPIRES_IN=7d
+
+# Razorpay keys
+RAZORPAY_KEY_ID=rzp_test_SvrMc2afQwWHpj
+RAZORPAY_KEY_SECRET=YDBHx9UO1GXLWyQ6h5DbbFXV
+
 ```
 
 ### `client/.env`
